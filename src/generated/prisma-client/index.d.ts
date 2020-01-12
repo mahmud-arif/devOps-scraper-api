@@ -119,8 +119,8 @@ export interface WebsiteCreateInput {
   id?: Maybe<ID_Input>;
   url?: Maybe<String>;
   title?: Maybe<String>;
-  updatedAt: DateTimeInput;
-  createdAt: DateTimeInput;
+  updatedAt?: Maybe<DateTimeInput>;
+  createdAt?: Maybe<DateTimeInput>;
 }
 
 export interface WebsiteUpdateInput {
@@ -253,8 +253,8 @@ export interface Website {
   id: ID_Output;
   url?: String;
   title?: String;
-  updatedAt: DateTimeOutput;
-  createdAt: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
+  createdAt?: DateTimeOutput;
 }
 
 export interface WebsitePromise extends Promise<Website>, Fragmentable {
@@ -374,8 +374,8 @@ export interface WebsitePreviousValues {
   id: ID_Output;
   url?: String;
   title?: String;
-  updatedAt: DateTimeOutput;
-  createdAt: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
+  createdAt?: DateTimeOutput;
 }
 
 export interface WebsitePreviousValuesPromise
