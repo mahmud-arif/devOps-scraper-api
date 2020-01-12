@@ -1,0 +1,14 @@
+type Query {
+    websites: Website
+}
+
+type Mutation {
+    createWebsite(url: String, title: String): Website
+}
+
+
+type Website {
+  id: ID! 
+  url: String!
+  title: String!
+}
