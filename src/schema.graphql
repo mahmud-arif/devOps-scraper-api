@@ -1,5 +1,5 @@
 type Query {
-    websites: Website
+    websites: [Website]!
 }
 
 type Mutation {
