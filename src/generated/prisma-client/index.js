@@ -5,13 +5,13 @@ var typeDefs = require("./prisma-schema").typeDefs;
 
 var models = [
   {
-    name: "User",
+    name: "Website",
     embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `http://localhost:4466`
+  endpoint: `${process.env["PRISMA_API"]}`
 });
 exports.prisma = new exports.Prisma();

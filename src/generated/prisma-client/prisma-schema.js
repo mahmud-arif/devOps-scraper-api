@@ -3,7 +3,7 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateUser {
+/* GraphQL */ `type AggregateWebsite {
   count: Int!
 }
 
@@ -11,15 +11,17 @@ type BatchPayload {
   count: Long!
 }
 
+scalar DateTime
+
 scalar Long
 
 type Mutation {
-  createUser(data: UserCreateInput!): User!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createWebsite(data: WebsiteCreateInput!): Website!
+  updateWebsite(data: WebsiteUpdateInput!, where: WebsiteWhereUniqueInput!): Website
+  updateManyWebsites(data: WebsiteUpdateManyMutationInput!, where: WebsiteWhereInput): BatchPayload!
+  upsertWebsite(where: WebsiteWhereUniqueInput!, create: WebsiteCreateInput!, update: WebsiteUpdateInput!): Website!
+  deleteWebsite(where: WebsiteWhereUniqueInput!): Website
+  deleteManyWebsites(where: WebsiteWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -40,74 +42,95 @@ type PageInfo {
 }
 
 type Query {
-  user(where: UserWhereUniqueInput!): User
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  website(where: WebsiteWhereUniqueInput!): Website
+  websites(where: WebsiteWhereInput, orderBy: WebsiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Website]!
+  websitesConnection(where: WebsiteWhereInput, orderBy: WebsiteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WebsiteConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  website(where: WebsiteSubscriptionWhereInput): WebsiteSubscriptionPayload
 }
 
-type User {
+type Website {
   id: ID!
-  name: String!
+  url: String
+  title: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
-type UserConnection {
+type WebsiteConnection {
   pageInfo: PageInfo!
-  edges: [UserEdge]!
-  aggregate: AggregateUser!
+  edges: [WebsiteEdge]!
+  aggregate: AggregateWebsite!
 }
 
-input UserCreateInput {
+input WebsiteCreateInput {
   id: ID
-  name: String!
+  url: String
+  title: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
-type UserEdge {
-  node: User!
+type WebsiteEdge {
+  node: Website!
   cursor: String!
 }
 
-enum UserOrderByInput {
+enum WebsiteOrderByInput {
   id_ASC
   id_DESC
-  name_ASC
-  name_DESC
+  url_ASC
+  url_DESC
+  title_ASC
+  title_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
-type UserPreviousValues {
+type WebsitePreviousValues {
   id: ID!
-  name: String!
+  url: String
+  title: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
-type UserSubscriptionPayload {
+type WebsiteSubscriptionPayload {
   mutation: MutationType!
-  node: User
+  node: Website
   updatedFields: [String!]
-  previousValues: UserPreviousValues
+  previousValues: WebsitePreviousValues
 }
 
-input UserSubscriptionWhereInput {
+input WebsiteSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: UserWhereInput
-  AND: [UserSubscriptionWhereInput!]
+  node: WebsiteWhereInput
+  AND: [WebsiteSubscriptionWhereInput!]
 }
 
-input UserUpdateInput {
-  name: String
+input WebsiteUpdateInput {
+  url: String
+  title: String
+  updatedAt: DateTime
+  createdAt: DateTime
 }
 
-input UserUpdateManyMutationInput {
-  name: String
+input WebsiteUpdateManyMutationInput {
+  url: String
+  title: String
+  updatedAt: DateTime
+  createdAt: DateTime
 }
 
-input UserWhereInput {
+input WebsiteWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -122,24 +145,54 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  AND: [UserWhereInput!]
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  AND: [WebsiteWhereInput!]
 }
 
-input UserWhereUniqueInput {
+input WebsiteWhereUniqueInput {
   id: ID
 }
 `
