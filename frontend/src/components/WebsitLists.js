@@ -1,6 +1,9 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Table} from 'antd';
+const { Column } = Table;
+
 
 
 const websiteList = props => {
@@ -8,13 +11,11 @@ const websiteList = props => {
     
     
     if (loading) return <h1>loading...</h1>; 
-    const show = props.data.websites.map(website=>(
-        <h1 key={website.id}>{website.url}</h1>
-    ))
     return (
-       <div>
-          {show}
-       </div>
+       <Table dataSource={props.data.websites} className="table">
+          <Column title="Url" dataIndex="url" key="url"/>
+          <Column title="Title" dataIndex="title" key="title"/>
+       </Table>
     )
 
 }
