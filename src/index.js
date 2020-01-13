@@ -3,10 +3,12 @@ const { prisma } = require('./generated/prisma-client');
 
 const Query = require('./resolvers/websites/Query'); 
 const Mutation = require('./resolvers/websites/Mutation'); 
+const Subscription = require('./resolvers/websites/Subscription')
 
 const resolvers = {
     Query, 
-    Mutation
+	Mutation, 
+	Subscription
 }
 
 const server = new GraphQLServer({

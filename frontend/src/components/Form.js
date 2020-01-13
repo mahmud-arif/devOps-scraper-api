@@ -10,8 +10,7 @@ const formInput = (props) => {
 			if (!err) {
 				props.mutate({
 					variables: {
-						url: values.url,
-						title: values.title
+						url: values.url
 					}
 				});
 			}
@@ -26,11 +25,6 @@ const formInput = (props) => {
 				})(<Input placeholder="url" />)}
 			</Form.Item>
 			<Form.Item>
-				{getFieldDecorator('title', {
-					rules: [ { required: true, message: 'Please input title' } ]
-				})(<Input placeholder="title" />)}
-			</Form.Item>
-			<Form.Item>
 				<Button type="primary" htmlType="submit" className="login-form-button">
 					Add url
 				</Button>
@@ -40,8 +34,8 @@ const formInput = (props) => {
 };
 
 const mutation = gql`
-	mutation createWebsite($url: String, $title: String) {
-		createWebsite(url: $url, title: $title) {
+	mutation createWebsite($url: String) {
+		createWebsite(url: $url) {
 			id
 			url
 			title
