@@ -16,7 +16,9 @@ const formInput = (props) => {
 			}
 		});
 	};
+
 	const { getFieldDecorator } = props.form;
+
 	return (
 		<Form onSubmit={handleSubmit} className="login-form form">
 			<Form.Item>
