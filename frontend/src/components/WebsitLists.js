@@ -1,31 +1,16 @@
 import React, {useSate, useEffect} from 'react';
 import { graphql, useSubscription} from 'react-apollo';
-import gql from 'graphql-tag';
+import useNewSub from '../Hooks/useNewUrlSub'; 
+import useUrlQuery from '../Hooks/useUrlsQuery'
 import { Table} from 'antd';
 const { Column } = Table;
 
 let dataSource = []; 
-const SUB = gql`
-subscription{
-  newUrl{
-    id, 
-    url,
-    title
-  }
-}
-` 
-// function GetData(){
-//   
-//    if(!loading) return data.newUrl
-// }
-
 
 function WebsiteList(props){
-   
-   const {data, loading} = useSubscription(SUB);
-
-    if (loading) return <h1>loading...</h1>; 
-    dataSource = [data.newUrl]
+    
+   const data = useNewSub();
+    if (!data.loading) dataSource = [...dataSource, data.data.website]
     return (
        <Table dataSource={dataSource} className="table">
           <Column title="Url" dataIndex="url" key="url"/>
@@ -36,12 +21,4 @@ function WebsiteList(props){
 }
 
 
-const query = gql`{
-    websites{
-       id 
-       url
-       title
-     } 
-  }   
-`
-export default graphql(query)(WebsiteList);
+export default WebsiteList; 

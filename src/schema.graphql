@@ -1,5 +1,5 @@
 type Query {
-    websites: [Website]!
+    website: [Website]!
 }
 
 type Mutation {
@@ -7,7 +7,7 @@ type Mutation {
 }
 
 type Subscription {
-  newUrl: Website!
+  website: Website!
 }
 
 

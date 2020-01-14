@@ -3,7 +3,7 @@ function newUrlSubscribe(parent, args, context, info) {
   }
   
 
-  const newUrl = {
+  const website = {
 	subscribe: newUrlSubscribe,
 	resolve: (payload) => {
 		return payload;
@@ -12,5 +12,5 @@ function newUrlSubscribe(parent, args, context, info) {
 
 
 module.exports = {
-	newUrl
+	website
 };
