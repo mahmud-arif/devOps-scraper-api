@@ -10,6 +10,7 @@
     "dev": "concurrently \"yarn run server\" \"yarn run client\""
   },
   "dependencies": {
+    "bull": "^3.12.1",
     "concurrently": "^5.0.2",
     "graphql-yoga": "^1.18.3",
     "prisma": "^1.34.10",
