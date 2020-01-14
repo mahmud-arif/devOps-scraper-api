@@ -1,5 +1,9 @@
 version: '3'
 services:
+  redis-server: 
+    image: redis
+    ports: 
+      - "6379:6379"
   prisma:
     image: prismagraphql/prisma:1.34
     restart: always
