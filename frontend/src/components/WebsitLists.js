@@ -7,10 +7,11 @@ const { Column } = Table;
 
 let dataSource = []; 
 
+
 function WebsiteList(props){
-    
    const data = useNewSub();
-    if (!data.loading) dataSource = [...dataSource, data.data.website]
+   // console.log(data.loading)
+    if (!data.loading) dataSource.push(data.data.website); 
     return (
        <Table dataSource={dataSource} className="table">
           <Column title="Url" dataIndex="url" key="url"/>
