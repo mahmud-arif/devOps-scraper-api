@@ -1,18 +1,17 @@
 .App {
-  margin-top: 40px;
-  display: flex; 
-  flex-direction: column;
-  justify-content: center; 
-  align-items: center;
+	margin-top: 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .table {
-  width: 600px;
+	width: 600px;
 }
 
 .form {
-  min-width: 500px;
-  margin-bottom: 30px; 
-  align-items: center;
+	min-width: 500px;
+	margin-bottom: 30px;
+	align-items: center;
 }
-

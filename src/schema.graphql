@@ -1,19 +1,17 @@
 type Query {
-    website: [Website]!
+	website: [Website]!
 }
 
 type Mutation {
-    createWebsite(url: String, title: String): Website
+	createWebsite(url: String, title: String): Website
 }
 
 type Subscription {
-  website: Website!
+	website: Website!
 }
-
 
 type Website {
-  id: ID! 
-  url: String!
-  title: String
+	id: ID!
+	url: String!
+	title: String
 }
-
