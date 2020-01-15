@@ -21,7 +21,16 @@ docker-compose up --build -d
 ```sh
 yarn
 alias devops="dotenv -e .env yarn workspace"
-devops backend deploy # deploy prisma from backend
-devops backend start
-devops frontend start
+
+# deploy prisma from backend
+devops backend deploy 
+
+# start backend, runs at http://localhost:4000
+devops backend start 
+
+# start scraper queue
+devops scraper start 
+
+# start frontend, runs at http://localhost:3000
+devops frontend start 
 ```
