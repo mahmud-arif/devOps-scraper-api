@@ -1,18 +1,15 @@
 import React from 'react';
-import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
 import { Form, Input, Button } from 'antd';
 
-const formInput = (props) => {
+import useAddUrlMutation from '../Hooks/useAddUrlMutation';
+
+const FormInput = (props) => {
+	const addUrl = useAddUrlMutation();
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		props.form.validateFields((err, values) => {
 			if (!err) {
-				props.mutate({
-					variables: {
-						url: values.url
-					}
-				});
+				addUrl({ url: values.url });
 			}
 		});
 	};
@@ -35,16 +32,6 @@ const formInput = (props) => {
 	);
 };
 
-const mutation = gql`
-	mutation createWebsite($url: String) {
-		createWebsite(url: $url) {
-			id
-			url
-			title
-		}
-	}
-`;
+const WrappedInputForm = Form.create({ name: 'normal_login' })(FormInput);
 
-const WrappedInputForm = Form.create({ name: 'normal_login' })(formInput);
-
-export default graphql(mutation)(WrappedInputForm);
+export default WrappedInputForm;
