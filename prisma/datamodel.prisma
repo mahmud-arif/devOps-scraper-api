@@ -1,7 +1,0 @@
-type Website {
-  id: ID! @id
-  url: String
-  title: String
-  updatedAt: DateTime
-  createdAt: DateTime
-}

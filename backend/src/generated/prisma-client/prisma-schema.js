@@ -56,8 +56,8 @@ type Website {
   id: ID!
   url: String
   title: String
-  updatedAt: DateTime
-  createdAt: DateTime
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 type WebsiteConnection {
@@ -70,8 +70,6 @@ input WebsiteCreateInput {
   id: ID
   url: String
   title: String
-  updatedAt: DateTime
-  createdAt: DateTime
 }
 
 type WebsiteEdge {
@@ -96,8 +94,8 @@ type WebsitePreviousValues {
   id: ID!
   url: String
   title: String
-  updatedAt: DateTime
-  createdAt: DateTime
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 type WebsiteSubscriptionPayload {
@@ -119,15 +117,11 @@ input WebsiteSubscriptionWhereInput {
 input WebsiteUpdateInput {
   url: String
   title: String
-  updatedAt: DateTime
-  createdAt: DateTime
 }
 
 input WebsiteUpdateManyMutationInput {
   url: String
   title: String
-  updatedAt: DateTime
-  createdAt: DateTime
 }
 
 input WebsiteWhereInput {

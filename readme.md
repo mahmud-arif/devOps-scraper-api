@@ -1,23 +1,27 @@
-# Guide 
+# Requirements
 
+- [Docker](https://docs.docker.com/install/)
+- Docker Compose
+- Prisma
+- NodeJS
+- yarn
+- dotenv-cli
 
- ### .env file 
-  - create `.env` file same level with package.json file 
-      ```js 
-       PRISMA_API= put your prisma url 
-       PRISMA_MANAGEMENT_API_SECRET=prisma secret
-     ```
-### Run required services
+# Run required services
 
-- [Docker](https://docs.docker.com/install/) (installation process if not installed in yor pc)
-- Goto project folder from your terminal  
+Copy the `.env.example` and rename it to `.env`, fill up the details.
+Goto project folder from your terminal,
 
-   ```js
-   $ docker-compose up --build -d
-   $ prisma deploy
-   ```
-### Run App
-- yarn 
-- yarn run client-install
-- yarn run dev
+```
+docker-compose up --build -d
+```
 
+# Run App
+
+```sh
+yarn
+alias devops="dotenv -e .env yarn workspace"
+devops backend deploy # deploy prisma from backend
+devops backend start
+devops frontend start
+```
