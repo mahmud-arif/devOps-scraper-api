@@ -1,11 +1,12 @@
+const Queue = require('bull');
+
 const getTitle = require('./utils/puppetter');
 const { prisma } = require('../../generated/prisma-client');
 
-const Queue = require('bull');
 let scpQueue = new Queue('scrap queue');
 
 scpQueue.process(async (job, done) => {
-	let url = job.data.url;
+	const {url} = job.data;
 	const title = await getTitle(job.data.url);
 	await prisma.createWebsite({
 		url,
@@ -16,7 +17,7 @@ scpQueue.process(async (job, done) => {
 
 async function createWebsite(parent, args, context, info) {
 	const { url } = args;
-	scpQueue.add({ url: url });
+	scpQueue.add({ url });
 	scpQueue.clean(100);
 }
 
