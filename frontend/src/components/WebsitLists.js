@@ -1,7 +1,5 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
 import useNewSub from '../Hooks/useNewUrlSub';
-import useUrlQuery from '../Hooks/useUrlsQuery';
 import { Table } from 'antd';
 const { Column } = Table;
 
