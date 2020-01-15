@@ -9,9 +9,9 @@ import './App.css';
 function App() {
 	return (
 		<ApolloProvider client={apolloClient}>
-			<div className="App">
+			<React.Fragment className="App">
 				<TitleScrap />
-			</div>
+			</React.Fragment>
 		</ApolloProvider>
 	);
 }
