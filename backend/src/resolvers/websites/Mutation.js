@@ -1,8 +1,21 @@
 const Queue = require("bull");
 const { prisma } = require("../../generated/prisma-client");
 
-let scpQueue = new Queue("scrape queue");
-let mutationQueue = new Queue("Mutation Queue");
+let scpQueue = new Queue("scrape queue", {
+  redis: {
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASS
+  }
+});
+
+let mutationQueue = new Queue("Mutation Queue", {
+  redis: {
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASS
+  }
+});
 
 mutationQueue.process(async job => {
   const { url, title } = job.data;
