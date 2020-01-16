@@ -115,9 +115,16 @@ export type WebsiteOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type WebsiteWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface WebsiteCreateInput {
+  id?: Maybe<ID_Input>;
+  url?: Maybe<String>;
+  title?: Maybe<String>;
+}
+
+export interface WebsiteUpdateInput {
+  url?: Maybe<String>;
+  title?: Maybe<String>;
+}
 
 export interface WebsiteWhereInput {
   id?: Maybe<ID_Input>;
@@ -181,17 +188,6 @@ export interface WebsiteWhereInput {
   AND?: Maybe<WebsiteWhereInput[] | WebsiteWhereInput>;
 }
 
-export interface WebsiteCreateInput {
-  id?: Maybe<ID_Input>;
-  url?: Maybe<String>;
-  title?: Maybe<String>;
-}
-
-export interface WebsiteUpdateInput {
-  url?: Maybe<String>;
-  title?: Maybe<String>;
-}
-
 export interface WebsiteUpdateManyMutationInput {
   url?: Maybe<String>;
   title?: Maybe<String>;
@@ -206,8 +202,45 @@ export interface WebsiteSubscriptionWhereInput {
   AND?: Maybe<WebsiteSubscriptionWhereInput[] | WebsiteSubscriptionWhereInput>;
 }
 
+export type WebsiteWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface WebsiteEdge {
+  node: Website;
+  cursor: String;
+}
+
+export interface WebsiteEdgePromise extends Promise<WebsiteEdge>, Fragmentable {
+  node: <T = WebsitePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface WebsiteEdgeSubscription
+  extends Promise<AsyncIterator<WebsiteEdge>>,
+    Fragmentable {
+  node: <T = WebsiteSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
 }
 
 export interface Website {
@@ -244,6 +277,31 @@ export interface WebsiteNullablePromise
   title: () => Promise<String>;
   updatedAt: () => Promise<DateTimeOutput>;
   createdAt: () => Promise<DateTimeOutput>;
+}
+
+export interface WebsiteSubscriptionPayload {
+  mutation: MutationType;
+  node: Website;
+  updatedFields: String[];
+  previousValues: WebsitePreviousValues;
+}
+
+export interface WebsiteSubscriptionPayloadPromise
+  extends Promise<WebsiteSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = WebsitePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = WebsitePreviousValuesPromise>() => T;
+}
+
+export interface WebsiteSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<WebsiteSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = WebsiteSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = WebsitePreviousValuesSubscription>() => T;
 }
 
 export interface WebsiteConnection {
@@ -290,23 +348,6 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface WebsiteEdge {
-  node: Website;
-  cursor: String;
-}
-
-export interface WebsiteEdgePromise extends Promise<WebsiteEdge>, Fragmentable {
-  node: <T = WebsitePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface WebsiteEdgeSubscription
-  extends Promise<AsyncIterator<WebsiteEdge>>,
-    Fragmentable {
-  node: <T = WebsiteSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
 export interface AggregateWebsite {
   count: Int;
 }
@@ -321,47 +362,6 @@ export interface AggregateWebsiteSubscription
   extends Promise<AsyncIterator<AggregateWebsite>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface WebsiteSubscriptionPayload {
-  mutation: MutationType;
-  node: Website;
-  updatedFields: String[];
-  previousValues: WebsitePreviousValues;
-}
-
-export interface WebsiteSubscriptionPayloadPromise
-  extends Promise<WebsiteSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = WebsitePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = WebsitePreviousValuesPromise>() => T;
-}
-
-export interface WebsiteSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<WebsiteSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = WebsiteSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = WebsitePreviousValuesSubscription>() => T;
 }
 
 export interface WebsitePreviousValues {
@@ -393,17 +393,6 @@ export interface WebsitePreviousValuesSubscription
 }
 
 /*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
 DateTime scalar input type, allowing Date
 */
 export type DateTimeInput = Date | string;
@@ -414,14 +403,25 @@ DateTime scalar output type, which is always a string
 export type DateTimeOutput = string;
 
 /*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
+
+/*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
-export type Boolean = boolean;
+export type ID_Input = string | number;
+export type ID_Output = string;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 export type Long = string;
 

@@ -1,18 +1,15 @@
 const Queue = require("bull");
+const redis = {
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+  password: process.env.REDIS_PASS
+}
 let scpQueue = new Queue("scrape queue", {
-  redis: {
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
-    password: process.env.REDIS_PASS
-  }
+  redis
 });
 
 let mutationQueue = new Queue("Mutation Queue", {
-  redis: {
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
-    password: process.env.REDIS_PASS
-  }
+ redis
 });
 
 const getTitle = require("./utils/puppetter");

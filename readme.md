@@ -1,11 +1,11 @@
 # Requirements
 
 - [Docker](https://docs.docker.com/install/)
-- Docker Compose
-- Prisma
-- NodeJS
-- yarn
-- dotenv-cli
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [NodeJS](https://nodejs.org/en/)
+- [yarn](https://yarnpkg.com/lang/en/docs/install/#debian-stable)
+- Prisma (`yarn global add prisma`)
+- dotenv-cli(`yarn global add dotenv-cli`)
 
 # Run required services
 
@@ -14,6 +14,10 @@ Goto project folder from your terminal,
 
 ```
 docker-compose up --build -d
+
+# PORT 6379, HOST 127.0.0.1
+docker run --name my-redis-container -p 6379:6379 -d redis
+
 ```
 
 # Run App
