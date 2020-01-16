@@ -20,7 +20,7 @@ export default () => {
       variables: {
         url: url
       },
-      refetchQueries:[{query}]
+      // refetchQueries:[{query}]
     });
   };
 };
