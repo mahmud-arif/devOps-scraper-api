@@ -9,9 +9,10 @@ const FormInput = (props) => {
 		e.preventDefault();
 		props.form.validateFields((err, values) => {
 			if (!err) {
-				addUrl({ url: values.url });
+        addUrl({ url: values.url });
+        props.form.resetFields()
 			}
-		});
+    });
 	};
 
 	const { getFieldDecorator } = props.form;
@@ -24,7 +25,7 @@ const FormInput = (props) => {
 				})(<Input placeholder="url" />)}
 			</Form.Item>
 			<Form.Item>
-				<Button type="primary" htmlType="submit" className="login-form-button">
+				<Button type="primary" htmlType="submit"  className="login-form-button">
 					Add url
 				</Button>
 			</Form.Item>

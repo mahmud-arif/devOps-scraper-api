@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import {query} from './useUrlsQuery'; 
 import { useMutation } from 'react-apollo';
 
 export const mutation = gql`
@@ -18,7 +19,8 @@ export default () => {
     mutate({
       variables: {
         url: url
-      }
+      },
+      refetchQueries:[{query}]
     });
   };
 };

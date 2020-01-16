@@ -29,7 +29,11 @@ const link = split(
   httpLink
 );
 
+const cache = new InMemoryCache({
+  dataIdFromObject: object => object.id 
+});
+
 export default new ApolloClient({
-  cache: new InMemoryCache(),
+  cache,
   link
 });
