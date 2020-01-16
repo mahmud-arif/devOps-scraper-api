@@ -3,7 +3,7 @@ import { ApolloProvider } from 'react-apollo';
 import 'antd/dist/antd.css';
 
 import apolloClient from './apolloSetup';
-import TitleScrap from './pages/titleScrap';
+import TitleScrap from '../pages/titleScrap';
 import './App.css';
 
 function App() {
