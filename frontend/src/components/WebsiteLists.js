@@ -12,11 +12,11 @@ function WebsiteList(props) {
   const data = useNewSub();
 
   if(!prevData.loading) dataSource = [...prevData.data.website] 
-  if (!data.loading) dataSource.push(data.data.website);
+  if (!data.loading) dataSource.unshift(data.data.website);
 
   data.loading = true;
 	return (
-		<Table dataSource={dataSource.reverse()} className="table">
+		<Table dataSource={dataSource} className="table">
 			<Column title="Url" dataIndex="url" key="url" />
 			<Column title="Title" dataIndex="title" key="title" />
 		</Table>
