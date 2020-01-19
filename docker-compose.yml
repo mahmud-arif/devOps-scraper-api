@@ -1,18 +1,13 @@
 version: '3'
 services:
   redis:
-    image: redis
-    ports: 
-      - 6379:6379
+    image: redis:latest
   nginx:
     image: nginx:latest
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
-    depends_on:
-      - backend
-      - frontend
     restart: always
     env_file: ${ENV_FILE}
   base:
@@ -20,12 +15,14 @@ services:
     env_file: ${ENV_FILE}
     build: .
   scraper: 
-    image: base
+    build:
+      context: ./scraper
     command: >
-       sh -c "yarn workspace scraper start"
+       sh -c "Xvfb :101 -screen 0 1024x768x16 &
+            yarn run start"
     env_file: ${ENV_FILE}
-    depends_on: 
-      - redis
+    environment:
+      - DISPLAY=:101
   backend:
     image: base
     command: >
@@ -35,7 +32,7 @@ services:
     ports: 
       - 4000:4000
     depends_on:
-      - redis
+      - prisma
     restart: always
   frontend:
     image: base
@@ -43,7 +40,5 @@ services:
       sh -c "yarn workspace frontend start"
     restart: always
     depends_on:
-      - backend
-    links:
       - backend
     env_file: ${ENV_FILE}

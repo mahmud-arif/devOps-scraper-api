@@ -12,29 +12,11 @@
 Copy the `.env.example` and rename it to `.env`, fill up the details.
 Goto project folder from your terminal,
 
-```
-docker-compose up --build -d
-
-# PORT 6379, HOST 127.0.0.1
-docker run --name my-redis-container -p 6379:6379 -d redis
-
-```
-
-# Run App
-
 ```sh
-yarn
-alias devops="dotenv -e .env yarn workspace"
+ # first  run this
+ ENV_FILE=.env docker-compose -f docker-compose.prisma.yml  up --build -d
+ 
+ # then this
+  ENV_FILE=.env docker-compose -f docker-compose.prisma.yml -f docker-compose.yml up --build
 
-# deploy prisma from backend
-devops backend deploy 
-
-# start backend, runs at http://localhost:4000
-devops backend start 
-
-# start scraper queue
-devops scraper start 
-
-# start frontend, runs at http://localhost:3000
-devops frontend start 
 ```

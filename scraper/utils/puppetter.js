@@ -14,11 +14,14 @@ const getTitle = async (url) => {
 		args
 	});
 
-	// create a empty page in the browser
+  // create a empty page in the browser
+  console.log('openning browser')
 	const page = await browser.newPage();
-	// goto given url from the page
+  // goto given url from the page
+  console.log('goto url')
 	await page.goto(url);
-	// collect url title
+  // collect url title
+  console.log('collecting url')
 	const title = await page.title();
 	// clear browser instance
 	await browser.close();
