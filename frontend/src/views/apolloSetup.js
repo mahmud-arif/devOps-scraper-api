@@ -5,6 +5,8 @@ import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from "apollo-utilities";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
+
+// websocket link instance create
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:4000`,
   options: {
@@ -12,9 +14,11 @@ const wsLink = new WebSocketLink({
   }
 });
 
+// api link instance create
 const httpLink = new HttpLink({
   uri: "http://localhost:4000"
 });
+
 
 const link = split(
   // split based on operation type

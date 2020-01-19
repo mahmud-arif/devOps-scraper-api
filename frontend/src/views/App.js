@@ -6,6 +6,7 @@ import apolloClient from './apolloSetup';
 import TitleScrap from '../pages/titleScrap';
 import './App.css';
 
+
 function App() {
 	return (
 		<ApolloProvider client={apolloClient}>

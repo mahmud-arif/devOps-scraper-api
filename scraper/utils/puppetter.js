@@ -8,13 +8,19 @@ puppeteer.use(StealthPlugin());
 const getTitle = async (url) => {
 	const args = [ '--no-sandbox', '--disable-setuid-sandbox' ];
 
+	// crate browser instance
 	const browser = await puppeteer.launch({
 		headless: false,
 		args
 	});
+
+	// create a empty page in the browser
 	const page = await browser.newPage();
+	// goto given url from the page
 	await page.goto(url);
+	// collect url title
 	const title = await page.title();
+	// clear browser instance
 	await browser.close();
 	return title;
 };

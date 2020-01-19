@@ -1,6 +1,8 @@
 const { GraphQLServer } = require('graphql-yoga');
+// prisma instance 
 const { prisma } = require('./generated/prisma-client');
 
+// import resolver 
 const Query = require('./resolvers/websites/Query');
 const Mutation = require('./resolvers/websites/Mutation');
 const Subscription = require('./resolvers/websites/Subscription');
@@ -11,6 +13,7 @@ const resolvers = {
 	Subscription
 };
 
+// setup graphql server
 const server = new GraphQLServer({
 	typeDefs: './src/schema.graphql',
 	resolvers,
