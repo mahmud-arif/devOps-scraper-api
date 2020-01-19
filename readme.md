@@ -16,7 +16,9 @@ Goto project folder from your terminal,
  # first  run this
  ENV_FILE=.env docker-compose -f docker-compose.prisma.yml  up --build -d
  
- # then this
-  ENV_FILE=.env docker-compose -f docker-compose.prisma.yml -f docker-compose.yml up --build
+ # then run this. 
+ ENV_FILE=.env docker-compose -f docker-compose.prisma.yml -f docker-compose.yml up --build
 
 ```
+
+### Now visit --> http://localhost:80
