@@ -22,3 +22,13 @@ Goto project folder from your terminal,
 ```
 
 ### Now visit --> http://localhost:80
+
+
+# Error
+
+If prisma not connect with backend. 
+
+```
+  TypeError: cannot read property Website of undefined
+```
+
