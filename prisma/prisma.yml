@@ -1,0 +1,7 @@
+endpoint: ${env:PRISMA_API}
+datamodel: datamodel.graphql
+databaseType: document
+
+generate:
+  - generator: javascript-client
+    output: ./src/generated/prisma-client/
